@@ -5,17 +5,17 @@
   "storage": {
     "files": [
       {
-        "path": "/opt/extensions-store/wasmedge-v0.14.1-x86-64.raw",
+        "path": "/opt/extensions-store/llamaedge-v0.14.1-x86-64.raw",
         "contents": {
-          "source": "https://github.com/second-state/sysext-bakery/releases/download/wasmedge-v0.14.1.0/wasmedge-v0.14.1-x86-64.raw"
+          "source": "https://github.com/second-state/sysext-bakery/releases/download/wasmedge-v0.14.1.0/llamaedge-v0.14.1-x86-64.raw"
         },
         "mode": 272
       }
     ],
     "links": [
       {
-        "path": "/etc/extensions/wasmedge.raw",
-        "target": "/opt/extensions-store/wasmedge-v0.14.1-x86-64.raw"
+        "path": "/etc/extensions/llamaedge.raw",
+        "target": "/opt/extensions-store/llamaedge-v0.14.1-x86-64.raw"
       }
     ]
   },

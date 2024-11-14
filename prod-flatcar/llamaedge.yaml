@@ -4,16 +4,16 @@ version: 1.0.0
 storage:
 
   files:
-    # installs wasmedge version on first boot
-    - path: /opt/extensions-store/wasmedge-v0.14.1-x86-64.raw
+    # installs llamaedge version on first boot
+    - path: /opt/extensions-store/llamaedge-v0.14.1-x86-64.raw
       mode: 0420
       contents:
-        source: https://github.com/second-state/sysext-bakery/releases/download/wasmedge-v0.14.1.0/wasmedge-v0.14.1-x86-64.raw
+        source: https://github.com/second-state/sysext-bakery/releases/download/wasmedge-v0.14.1.0/llamaedge-v0.14.1-x86-64.raw
 
   links:
     # creates a symlink to the current version so we can update easily
-    - path: /etc/extensions/wasmedge.raw
-      target: /opt/extensions-store/wasmedge-v0.14.1-x86-64.raw
+    - path: /etc/extensions/llamaedge.raw
+      target: /opt/extensions-store/llamaedge-v0.14.1-x86-64.raw
 
 systemd:
   units:
