@@ -1,0 +1,39 @@
+variant: flatcar
+version: 1.0.0
+
+storage:
+
+  files:
+    # installs wasmedge version on first boot
+    - path: /opt/extensions-store/wasmedge-v0.14.1-x86-64.raw
+      mode: 0420
+      contents:
+        source: https://github.com/hydai/sysext-bakery/releases/download/wasmedge-v0.14.1/wasmedge-v0.14.1-x86-64.raw
+
+  links:
+    # creates a symlink to the current version so we can update easily
+    - path: /etc/extensions/wasmedge.raw
+      target: /opt/extensions-store/wasmedge-v0.14.1-x86-64.raw
+
+systemd:
+  units:
+    - name: sysext-update-watcher.path
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Trigger a restart of systemd-sysext to auto-merge new / updated extensions.
+        [Path]
+        PathModified=/etc/extensions
+        Unit=sysext-restart.service
+        [Install]
+        WantedBy=paths.target
+
+    - name: sysext-restart.service
+      enabled: false
+      contents: |
+        [Unit]
+        Description=Restart systemd-sysext, e.g. to merge new / updated sysexts.
+        [Service]
+        Restart=no
+        Type=oneshot
+        ExecStart=systemctl restart systemd-sysext

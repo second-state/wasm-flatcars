@@ -1,0 +1,36 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/opt/extensions-store/wasmedge-v0.14.1-x86-64.raw",
+        "contents": {
+          "source": "https://github.com/hydai/sysext-bakery/releases/download/wasmedge-v0.14.1/wasmedge-v0.14.1-x86-64.raw"
+        },
+        "mode": 272
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/extensions/wasmedge.raw",
+        "target": "/opt/extensions-store/wasmedge-v0.14.1-x86-64.raw"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Trigger a restart of systemd-sysext to auto-merge new / updated extensions.\n[Path]\nPathModified=/etc/extensions\nUnit=sysext-restart.service\n[Install]\nWantedBy=paths.target\n",
+        "enabled": true,
+        "name": "sysext-update-watcher.path"
+      },
+      {
+        "contents": "[Unit]\nDescription=Restart systemd-sysext, e.g. to merge new / updated sysexts.               \n[Service]\nRestart=no\nType=oneshot\nExecStart=systemctl restart systemd-sysext\n",
+        "enabled": false,
+        "name": "sysext-restart.service"
+      }
+    ]
+  }
+}
